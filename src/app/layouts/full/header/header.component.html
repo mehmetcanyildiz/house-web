@@ -1,49 +1,40 @@
 <mat-toolbar class="topbar">
   <!-- Mobile Menu -->
-  <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
-    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
-  </button>
-  <button mat-icon-button aria-label="Home">
-    <i-tabler class="d-flex" name="home"></i-tabler>
-  </button>
+  <a [routerLink]="['/']">
+    <img ngSrc="./assets/images/logos/dark-logo.svg" class="align-middle" alt="logo" height="50"
+         width="50"/>
+  </a>
   <span class="flex-1-auto"></span>
   <h2>Dashboard</h2>
   <span class="flex-1-auto"></span>
-  <button mat-icon-button aria-label="Home">
+  <a [routerLink]="['classified/create']" mat-icon-button aria-label="Home">
     <i-tabler class="d-flex" name="home-plus"></i-tabler>
-  </button>
+  </a>
   <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications"
           class="m-l-10">
-    <img
-      ngSrc="/assets/images/profile/user-4.jpg"
-      class="rounded-circle object-cover"
-      width="410"
-      height="410" alt=""/>
+    <img ngSrc="/assets/images/profile/user-4.jpg" class="rounded-circle object-cover" alt="" fill/>
   </button>
   <mat-menu #profilemenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
-    <button mat-menu-item>
+    <a [routerLink]="['profile/my-classifieds']" mat-menu-item>
       <mat-icon class="d-flex align-items-center">
         <i-tabler name="home-signal" class="icon-18 d-flex"></i-tabler>
       </mat-icon>
-      My Properties
-    </button>
-    <button mat-menu-item>
+      My Classifieds
+    </a>
+    <a [routerLink]="['profile/my-favorites']" mat-menu-item>
       <mat-icon class="d-flex align-items-center">
         <i-tabler name="heart" class="icon-18 d-flex"></i-tabler>
       </mat-icon>
       My Favorites
-    </button>
-    <button mat-menu-item>
+    </a>
+    <a [routerLink]="['profile/settings']" mat-menu-item>
       <mat-icon class="d-flex align-items-center">
-        <i-tabler
-          name="settings"
-          class="icon-18 d-flex"
-        ></i-tabler>
+        <i-tabler name="settings" class="icon-18 d-flex"></i-tabler>
       </mat-icon>
       Settings
-    </button>
+    </a>
     <div class="p-x-12 m-t-12">
-      <a [routerLink]="['/auth/login']" mat-flat-button color="primary" class="w-100">
+      <a [routerLink]="['auth/logout']" mat-flat-button color="primary" class="w-100">
         Logout
       </a>
     </div>
