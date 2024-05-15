@@ -15,6 +15,12 @@
     <img ngSrc="/assets/images/profile/user-4.jpg" class="rounded-circle object-cover" alt="" fill/>
   </button>
   <mat-menu #profilemenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <a [routerLink]="['classified/create']" mat-menu-item>
+      <mat-icon class="d-flex align-items-center">
+        <i-tabler name="home-plus" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+      Create Classifieds
+    </a>
     <a [routerLink]="['profile/my-classifieds']" mat-menu-item>
       <mat-icon class="d-flex align-items-center">
         <i-tabler name="home-signal" class="icon-18 d-flex"></i-tabler>
@@ -33,6 +39,7 @@
       </mat-icon>
       Settings
     </a>
+    <mat-divider></mat-divider>
     <div class="p-x-12 m-t-12">
       <a [routerLink]="['auth/logout']" mat-flat-button color="primary" class="w-100">
         Logout
