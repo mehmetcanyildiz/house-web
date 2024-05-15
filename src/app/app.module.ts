@@ -22,6 +22,7 @@ import {BlankComponent} from './layouts/blank/blank.component';
 // Vertical Layout
 import {HeaderComponent} from './layouts/full/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,9 @@ import {NgOptimizedImage} from "@angular/common";
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
+  providers: [
+    provideAnimationsAsync()
+  ],
 })
 export class AppModule {
 }
