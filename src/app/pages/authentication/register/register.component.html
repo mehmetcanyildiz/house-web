@@ -13,47 +13,99 @@
             </a>
           </div>
           <div class="or-border m-t-30">Sign up</div>
-          <form class="m-t-30">
-            <!-- firstname -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
-              Firstname
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="text" placeholder="Firstname" required/>
-            </mat-form-field>
-            <!-- lastname -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
-              Lastname
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="text" placeholder="Lastname" required/>
-            </mat-form-field>
-            <!-- email -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
-              Email Adddress
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="email" placeholder="E-mail" required/>
-            </mat-form-field>
-            <!-- password -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
-              Password
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" placeholder="Password" required/>
-            </mat-form-field>
-            <!-- re-password -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
-              Confirm Password
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" placeholder="Confirm Password" required/>
-            </mat-form-field>
-            <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
-              Sign Up
-            </a>
-            <!-- input -->
-          </form>
+          <mat-stepper>
+            <!-- Step 1 -->
+            <mat-step label="Step 1">
+              <form [formGroup]="firstFormGroup">
+                <!-- firstname -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="text" placeholder="Firstname" formControlName="firstname" required/>
+                  <mat-error *ngIf="firstFormGroup.get('firstname')?.hasError('required')">
+                    Firstname is required
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('firstname')?.hasError('pattern')">
+                    Invalid format (only alphabets allowed)
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('firstname')?.hasError('minlength')">
+                    Minimum length is 2 characters
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('firstname')?.hasError('maxlength')">
+                    Maximum length is 20 characters
+                  </mat-error>
+                </mat-form-field>
+                <!-- lastname -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="text" placeholder="Lastname" formControlName="lastname" required/>
+                  <mat-error *ngIf="firstFormGroup.get('lastname')?.hasError('required')">
+                    Lastname is required
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('lastname')?.hasError('pattern')">
+                    Invalid format (only alphabets allowed)
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('lastname')?.hasError('minlength')">
+                    Minimum length is 2 characters
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('lastname')?.hasError('maxlength')">
+                    Maximum length is 20 characters
+                  </mat-error>
+                </mat-form-field>
+                <!-- phone -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="number" placeholder="Phone" formControlName="phone" required/>
+                  <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('required')">
+                    Phone is required
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('pattern')">
+                    Invalid format (only numbers allowed)
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('minlength')">
+                    Minimum length is 10 digits
+                  </mat-error>
+                  <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('maxlength')">
+                    Maximum length is 10 digits
+                  </mat-error>
+                </mat-form-field>
+              </form>
+            </mat-step>
+            <!-- Step 2 -->
+            <mat-step label="Step 2">
+              <form [formGroup]="secondFormGroup">
+                <!-- email -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="email" placeholder="E-mail" formControlName="email" required/>
+                  <mat-error *ngIf="secondFormGroup.get('email')?.hasError('required')">
+                    Email is required
+                  </mat-error>
+                  <mat-error *ngIf="secondFormGroup.get('email')?.hasError('email')">
+                    Invalid email format
+                  </mat-error>
+                </mat-form-field>
+                <!-- password -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="password" placeholder="Password" formControlName="password" required/>
+                  <mat-error *ngIf="secondFormGroup.get('password')?.hasError('required')">
+                    Password is required
+                  </mat-error>
+                  <mat-error *ngIf="secondFormGroup.get('password')?.hasError('minlength')">
+                    Minimum length is 6 characters
+                  </mat-error>
+                  <mat-error *ngIf="secondFormGroup.get('password')?.hasError('maxlength')">
+                    Maximum length is 20 characters
+                  </mat-error>
+                </mat-form-field>
+                <!-- confirmPassword -->
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="password" placeholder="Confirm Password" formControlName="confirm" required/>
+                  <mat-error *ngIf="secondFormGroup.get('confirm')?.hasError('required')">
+                    Confirm Password is required
+                  </mat-error>
+                </mat-form-field>
+              </form>
+            </mat-step>
+          </mat-stepper>
+          <a (click)="onSubmit()" mat-flat-button color="primary" class="w-100">
+            Sign Up
+          </a>
           <span class="d-block f-w-500 text-center m-t-24">
             Already have an Account?
             <a [routerLink]="['/auth/login']"

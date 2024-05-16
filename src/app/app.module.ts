@@ -23,8 +23,11 @@ import {BlankComponent} from './layouts/blank/blank.component';
 import {HeaderComponent} from './layouts/full/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {ErrorHandlerService, HttpInterceptorService, JwtInterceptor} from "./helpers";
-
+import {
+  ErrorHandlerService,
+  HttpInterceptorService,
+  JwtInterceptor
+} from "./helpers";
 
 export const PROVIDERS: any[] = [
   {
@@ -40,7 +43,7 @@ export const PROVIDERS: any[] = [
   {
     provide: ErrorHandler,
     useClass: ErrorHandlerService
-  }
+  },
 ];
 
 @NgModule({

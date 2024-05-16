@@ -5,6 +5,9 @@ import {User} from "../../models";
 import {BehaviorSubject} from 'rxjs';
 import {LoginDTO} from "../../dto/authentication/LoginDTO";
 import {Router} from "@angular/router";
+import {RegisterDTO} from "../../dto/authentication/RegisterDTO";
+import {CustomSnackBar} from "../snackbar.service";
+import {ActivateDTO} from "../../dto/authentication/ActivateDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,7 @@ export class AuthenticationService {
 
   public userSubject: BehaviorSubject<User | null>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private snackBar: CustomSnackBar) {
     this.userSubject = new BehaviorSubject<User | null>(null);
   }
 
@@ -21,12 +24,9 @@ export class AuthenticationService {
     return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null;
   }
 
-  logIn(loginDTO: LoginDTO) {
+  login(loginDTO: LoginDTO) {
     const url: string = `${environment.apiUrl}/auth/login`;
-    const body: any = {email: loginDTO.email, password: loginDTO.password};
-
-    return this.http.post(url, body).subscribe((res: any) => {
-
+    return this.http.post(url, loginDTO).subscribe((res: any) => {
       const user: User = {
         uid: res.uid,
         email: res.email,
@@ -34,12 +34,16 @@ export class AuthenticationService {
         lastname: res.lastName,
         access_token: res.accessToken
       };
-
       this.userSubject.next(user);
-
       localStorage.setItem('user', JSON.stringify(user));
+      this.snackBar.route(res.message, '/');
+    });
+  }
 
-      this.router.navigate(['/']);
+  register(registerDTO: RegisterDTO) {
+    const url: string = `${environment.apiUrl}/auth/register`;
+    return this.http.post(url, registerDTO).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/auth/login');
     });
   }
 
@@ -55,9 +59,15 @@ export class AuthenticationService {
       (res: any) => {
         this.userSubject.next(null);
         localStorage.removeItem('user');
-        this.router.navigate(['/auth/login']);
+        this.snackBar.route(res.message, '/auth/login');
       }
     );
+  }
 
+  activateAccount(activateDTO: ActivateDTO) {
+    const url: string = `${environment.apiUrl}/auth/activate-account`;
+    return this.http.post(url, activateDTO).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/auth/login');
+    });
   }
 }

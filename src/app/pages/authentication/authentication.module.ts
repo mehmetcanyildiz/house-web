@@ -17,6 +17,8 @@ import {AuthenticationRoutes} from './authentication.routing';
 import {AppSideLoginComponent} from './login/login.component';
 import {AppSideRegisterComponent} from './register/register.component';
 import {AppSideForgotComponent} from "./forgot/forgot.component";
+import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
+import {AppSideActivateComponent} from "./activate/activate.component";
 
 @NgModule({
   imports: [
@@ -31,11 +33,15 @@ import {AppSideForgotComponent} from "./forgot/forgot.component";
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     NgOptimizedImage,
+    MatStep,
+    MatStepLabel,
+    MatStepper,
   ],
   declarations: [
     AppSideLoginComponent,
     AppSideRegisterComponent,
-    AppSideForgotComponent
+    AppSideForgotComponent,
+    AppSideActivateComponent
   ],
 })
 export class AuthenticationModule {

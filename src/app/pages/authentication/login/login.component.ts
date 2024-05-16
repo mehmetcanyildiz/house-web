@@ -23,7 +23,7 @@ export class AppSideLoginComponent implements OnInit {
       this.loginDTO.email = this.loginForm.controls['email'].value;
       this.loginDTO.password = this.loginForm.controls['password'].value;
 
-      this.authenticationService.logIn(this.loginDTO);
+      this.authenticationService.login(this.loginDTO);
     }
   }
 
