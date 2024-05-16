@@ -41,9 +41,9 @@
     </a>
     <mat-divider></mat-divider>
     <div class="p-x-12 m-t-12">
-      <a [routerLink]="['auth/logout']" mat-flat-button color="primary" class="w-100">
+      <button (click)="onLogout()" mat-flat-button color="primary" class="w-100">
         Logout
-      </a>
+      </button>
     </div>
   </mat-menu>
 </mat-toolbar>

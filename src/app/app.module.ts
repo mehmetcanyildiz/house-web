@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -22,7 +22,26 @@ import {BlankComponent} from './layouts/blank/blank.component';
 // Vertical Layout
 import {HeaderComponent} from './layouts/full/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {ErrorHandlerService, HttpInterceptorService, JwtInterceptor} from "./helpers";
+
+
+export const PROVIDERS: any[] = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService,
+    multi: true
+  },
+  {
+    provide: ErrorHandler,
+    useClass: ErrorHandlerService
+  }
+];
 
 @NgModule({
   declarations: [
@@ -46,6 +65,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
   providers: [
+    PROVIDERS,
     provideAnimationsAsync()
   ],
 })

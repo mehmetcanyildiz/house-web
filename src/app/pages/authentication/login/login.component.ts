@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoginDTO} from "../../../dto/auth/LoginDTO";
-import {AuthenticationService} from "../../../dto/auth/AuthenticationService";
+import {LoginDTO} from "../../../dto/authentication/LoginDTO";
+import {AuthenticationService} from "../../../services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class AppSideLoginComponent implements OnInit {
   loginDTO!: LoginDTO;
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private authenticationService: AuthenticationService) {
+  constructor(private formBuilder: FormBuilder,private authenticationService: AuthenticationService,private router: Router) {
   }
 
 
@@ -21,7 +22,8 @@ export class AppSideLoginComponent implements OnInit {
       this.loginDTO = new LoginDTO();
       this.loginDTO.email = this.loginForm.controls['email'].value;
       this.loginDTO.password = this.loginForm.controls['password'].value;
-      this.authenticationService.login(this.loginDTO);
+
+      this.authenticationService.logIn(this.loginDTO);
     }
   }
 

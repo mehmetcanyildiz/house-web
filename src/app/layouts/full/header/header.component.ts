@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, ViewEncapsulation,} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {AuthenticationService} from "../../../services";
 
 
 @Component({
@@ -16,6 +17,10 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,private authenticationService: AuthenticationService) {
+  }
+
+  onLogout() {
+    this.authenticationService.logout();
   }
 }
