@@ -24,6 +24,12 @@
                      type="email"
                      placeholder="pat@example.com"
                      required>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                Invalid email format
+              </mat-error>
             </mat-form-field>
             <!-- password -->
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
@@ -35,6 +41,15 @@
                      type="password"
                      placeholder="*******"
                      required/>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                Minimum length is 6 characters
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
+                Maximum length is 20 characters
+              </mat-error>
             </mat-form-field>
             <div class="d-flex align-items-center m-b-12">
               <mat-checkbox color="primary">Remember this Device</mat-checkbox>

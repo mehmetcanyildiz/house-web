@@ -13,7 +13,9 @@ export class AppSideLoginComponent implements OnInit {
   loginDTO!: LoginDTO;
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private authenticationService: AuthenticationService,private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService) {
   }
 
 
