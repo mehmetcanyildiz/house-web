@@ -12,9 +12,10 @@ export class CreateComponent implements OnInit {
 
   formDTO!: CreateDTO;
   componentForm!: FormGroup;
+  selectedFiles: File[] = [];
 
-  types: string[] = ['Sale', 'Rent'];
-  categories: string[] = ['House', 'Apartment', 'Residence', 'Detached House', 'Villa'];
+  types: string[] = ['SALE', 'RENT'];
+  categories: string[] = ['HOUSE', 'APARTMENT', 'RESIDENCE', 'DETACHED_HOUSE', 'VILLA'];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -44,26 +45,34 @@ export class CreateComponent implements OnInit {
 
   onSubmit() {
     if (this.componentForm.valid) {
+      if (this.selectedFiles.length === 0) {
+        this.snackBar.message('Please select at least one image');
+        return;
+      }
       this.formDTO = new CreateDTO();
 
       const formData = new FormData();
 
+      if (this.componentForm.value.isFurnished === null) {
+        this.componentForm.value.isFurnished = false;
+      }
+
       formData.append('title', this.componentForm.value.title);
       formData.append('description', this.componentForm.value.description);
-      formData.append('price', this.componentForm.value.price.toString());
+      formData.append('price', this.componentForm.value.price);
       formData.append('type', this.componentForm.value.type);
       formData.append('category', this.componentForm.value.category);
-      formData.append('roomNumber', this.componentForm.value.roomNumber.toString());
-      formData.append('livingRoomNumber', this.componentForm.value.livingRoomNumber.toString());
-      formData.append('grossArea', this.componentForm.value.grossArea.toString());
-      formData.append('netArea', this.componentForm.value.netArea.toString());
-      formData.append('buildingAge', this.componentForm.value.buildingAge.toString());
-      formData.append('floorLocation', this.componentForm.value.floorLocation.toString());
-      formData.append('totalFloor', this.componentForm.value.totalFloor.toString());
-      formData.append('isFurnished', this.componentForm.value.isFurnished.toString());
+      formData.append('roomNumber', this.componentForm.value.roomNumber);
+      formData.append('livingRoomNumber', this.componentForm.value.livingRoomNumber);
+      formData.append('grossArea', this.componentForm.value.grossArea);
+      formData.append('netArea', this.componentForm.value.netArea);
+      formData.append('buildingAge', this.componentForm.value.buildingAge);
+      formData.append('floorLocation', this.componentForm.value.floorLocation);
+      formData.append('totalFloor', this.componentForm.value.totalFloor);
+      formData.append('isFurnished', this.componentForm.value.isFurnished);
 
-      this.componentForm.value.images.forEach((image: Blob, index: any) => {
-        formData.append(`image${index}`, image);
+      this.selectedFiles.forEach(file => {
+        formData.append('images[]', file);
       });
 
       this.classifiedService.create(formData);
@@ -72,13 +81,10 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  onFileChange($event: Event) {
-    const files = ($event.target as HTMLInputElement).files;
-    if (files) {
-      this.componentForm.patchValue({
-        images: files
-      });
-      this.componentForm.get('images')?.updateValueAndValidity();
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      this.selectedFiles = Array.from(target.files);
     }
   }
 }
