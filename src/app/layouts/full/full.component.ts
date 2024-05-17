@@ -1,8 +1,11 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {filter, map, Subscription} from 'rxjs';
 import {MatSidenav} from '@angular/material/sidenav';
-
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
+import {Title} from "@angular/platform-browser";
+import {DataService} from "../../services/data.service";
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
 const MONITOR_VIEW = 'screen and (min-width: 1024px)';
@@ -13,7 +16,6 @@ const MONITOR_VIEW = 'screen and (min-width: 1024px)';
   styleUrls: [],
 })
 export class FullComponent implements OnInit {
-
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav | any;
 
@@ -28,7 +30,13 @@ export class FullComponent implements OnInit {
     return this.isMobileScreen;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private title: Title,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private dataService: DataService,
+  ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
     .observe([MOBILE_VIEW, TABLET_VIEW, MONITOR_VIEW])
@@ -39,9 +47,32 @@ export class FullComponent implements OnInit {
 
       this.isContentWidthFixed = state.breakpoints[MONITOR_VIEW];
     });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        let child = this.activatedRoute.firstChild;
+        while (child) {
+          if (child.firstChild) {
+            child = child.firstChild;
+          } else if (child.snapshot.data && child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          } else {
+            return null;
+          }
+        }
+        return null;
+      })
+    ).subscribe((data: any) => {
+      if (data) {
+        this.title.setTitle(data + ' | ' + environment.name);
+        this.dataService.data.emit(data);
+      }
+    });
   }
 
   ngOnInit(): void {
+
   }
 
   ngOnDestroy() {

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation,} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation,} from '@angular/core';
 import {AuthenticationService} from "../../../services";
+import {DataService} from "../../../services/data.service";
 
 
 @Component({
@@ -8,16 +8,22 @@ import {AuthenticationService} from "../../../services";
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
+export class HeaderComponent{
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
-  showFiller = false;
+  pageTitle = '';
 
-  constructor(public dialog: MatDialog,private authenticationService: AuthenticationService) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private dataService: DataService,
+  ) {
+    this.dataService.data.subscribe((data) => {
+      this.pageTitle = data;
+    });
   }
 
   onLogout() {

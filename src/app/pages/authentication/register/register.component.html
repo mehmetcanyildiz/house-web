@@ -103,7 +103,7 @@
               </form>
             </mat-step>
           </mat-stepper>
-          <a (click)="onSubmit()" mat-flat-button color="primary" class="w-100">
+          <a (click)="onSubmit()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid" mat-flat-button color="primary" class="w-100">
             Sign Up
           </a>
           <span class="d-block f-w-500 text-center m-t-24">
