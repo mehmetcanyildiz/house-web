@@ -14,21 +14,16 @@ export class ErrorHandlerService implements ErrorHandler {
   handleError(error: any): void {
     let message = '';
 
-    if(error.error && error.error.validationErrors){
+    if (error.error && error.error.validationErrors) {
       error.error.validationErrors.forEach((err: any) => {
         message += err + '\r\n';
       });
-    }
-    else if (error.error && error.error.error) {
+    } else if (error.error && error.error.error) {
       message = error.error.error;
-    }
-    else if (error instanceof HttpErrorResponse)
-    {
-      if (!navigator.onLine)
-      {
+    } else if (error instanceof HttpErrorResponse) {
+      if (!navigator.onLine) {
         message = 'No Internet Connection';
-      }
-      else {
+      } else {
         message = `HTTP Error: ${error.status} - ${error.message}`;
       }
     } else {

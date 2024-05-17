@@ -26,7 +26,7 @@ export class AppSideRegisterComponent implements OnInit {
       firstname: [
         '', [
           Validators.required,
-          Validators.pattern('^[a-zA-Z]*$'),
+          Validators.pattern('^[a-zA-ZğüşöçıİĞÜŞÖÇ\\s]*$'),
           Validators.minLength(2),
           Validators.maxLength(20)
         ]
@@ -34,7 +34,7 @@ export class AppSideRegisterComponent implements OnInit {
       lastname: [
         '', [
           Validators.required,
-          Validators.pattern('^[a-zA-Z]*$'),
+          Validators.pattern('^[a-zA-ZğüşöçıİĞÜŞÖÇ\\s]*$'),
           Validators.minLength(2),
           Validators.maxLength(20)
         ]

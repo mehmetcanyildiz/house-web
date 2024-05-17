@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation,} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation,} from '@angular/core';
 import {AuthenticationService} from "../../../services";
 import {DataService} from "../../../services/data.service";
 
@@ -8,7 +8,7 @@ import {DataService} from "../../../services/data.service";
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent{
+export class HeaderComponent {
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();

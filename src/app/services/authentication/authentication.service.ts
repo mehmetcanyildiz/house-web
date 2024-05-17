@@ -34,6 +34,7 @@ export class AuthenticationService {
         email: res.email,
         firstname: res.firstName,
         lastname: res.lastName,
+        phone: res.phone,
         access_token: res.accessToken
       };
       this.userSubject.next(user);
@@ -76,6 +77,8 @@ export class AuthenticationService {
   forgotPasswordClient(formDTO: ForgotDTO) {
     const url: string = `${environment.apiUrl}/auth/password-reset-client`;
     return this.http.post(url, formDTO).subscribe((res: any) => {
+      this.userSubject.next(null);
+      localStorage.removeItem('user');
       this.snackBar.route(res.message, '/auth/login');
     });
   }

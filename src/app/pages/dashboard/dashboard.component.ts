@@ -1,14 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {TablerIconsModule} from 'angular-tabler-icons';
-import {
-  NgApexchartsModule,
-} from 'ng-apexcharts';
+import {NgApexchartsModule,} from 'ng-apexcharts';
 import {RouterLink} from "@angular/router";
 
 

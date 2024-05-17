@@ -19,7 +19,8 @@
               <form [formGroup]="firstFormGroup">
                 <!-- firstname -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="text" placeholder="Firstname" formControlName="firstname" required/>
+                  <input matInput type="text" placeholder="Firstname" formControlName="firstname"
+                         required/>
                   <mat-error *ngIf="firstFormGroup.get('firstname')?.hasError('required')">
                     Firstname is required
                   </mat-error>
@@ -35,7 +36,8 @@
                 </mat-form-field>
                 <!-- lastname -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="text" placeholder="Lastname" formControlName="lastname" required/>
+                  <input matInput type="text" placeholder="Lastname" formControlName="lastname"
+                         required/>
                   <mat-error *ngIf="firstFormGroup.get('lastname')?.hasError('required')">
                     Lastname is required
                   </mat-error>
@@ -51,7 +53,8 @@
                 </mat-form-field>
                 <!-- phone -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="number" placeholder="Phone" formControlName="phone" required/>
+                  <input matInput type="number" placeholder="Phone" formControlName="phone"
+                         required/>
                   <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('required')">
                     Phone is required
                   </mat-error>
@@ -72,7 +75,8 @@
               <form [formGroup]="secondFormGroup">
                 <!-- email -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="email" placeholder="E-mail" formControlName="email" required/>
+                  <input matInput type="email" placeholder="E-mail" formControlName="email"
+                         required/>
                   <mat-error *ngIf="secondFormGroup.get('email')?.hasError('required')">
                     Email is required
                   </mat-error>
@@ -82,7 +86,8 @@
                 </mat-form-field>
                 <!-- password -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="password" placeholder="Password" formControlName="password" required/>
+                  <input matInput type="password" placeholder="Password" formControlName="password"
+                         required/>
                   <mat-error *ngIf="secondFormGroup.get('password')?.hasError('required')">
                     Password is required
                   </mat-error>
@@ -95,7 +100,8 @@
                 </mat-form-field>
                 <!-- confirmPassword -->
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="password" placeholder="Confirm Password" formControlName="confirm" required/>
+                  <input matInput type="password" placeholder="Confirm Password"
+                         formControlName="confirm" required/>
                   <mat-error *ngIf="secondFormGroup.get('confirm')?.hasError('required')">
                     Confirm Password is required
                   </mat-error>
@@ -103,7 +109,8 @@
               </form>
             </mat-step>
           </mat-stepper>
-          <a (click)="onSubmit()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid" mat-flat-button color="primary" class="w-100">
+          <a (click)="onSubmit()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"
+             mat-flat-button color="primary" class="w-100">
             Sign Up
           </a>
           <span class="d-block f-w-500 text-center m-t-24">

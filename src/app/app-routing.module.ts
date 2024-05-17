@@ -15,7 +15,7 @@ const routes: Routes = [
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
     ],
-    canActivate : [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '',

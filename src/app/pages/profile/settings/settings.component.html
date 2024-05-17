@@ -1,1 +1,71 @@
-<p>settings works!</p>
+<mat-card>
+  <form [formGroup]="componentForm" class="m-t-30 container">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" readonly>
+      <mat-error *ngIf="componentForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('email')?.hasError('email')">
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstname">
+      <mat-error *ngIf="componentForm.get('firstname')?.hasError('required')">
+        Firstname is required
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('firstname')?.hasError('pattern')">
+        Invalid format (only alphabets allowed)
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('firstname')?.hasError('minlength')">
+        Minimum length is 2 characters
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('firstname')?.hasError('maxlength')">
+        Maximum length is 20 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastname">
+      <mat-error *ngIf="componentForm.get('lastname')?.hasError('required')">
+        Lastname is required
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('lastname')?.hasError('pattern')">
+        Invalid format (only alphabets allowed)
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('lastname')?.hasError('minlength')">
+        Minimum length is 2 characters
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('lastname')?.hasError('maxlength')">
+        Maximum length is 20 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="number" formControlName="phone">
+      <mat-error *ngIf="componentForm.get('phone')?.hasError('required')">
+        Phone is required
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('phone')?.hasError('pattern')">
+        Invalid format (only numbers allowed)
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('phone')?.hasError('minlength')">
+        Minimum length is 10 digits
+      </mat-error>
+      <mat-error *ngIf="componentForm.get('phone')?.hasError('maxlength')">
+        Maximum length is 10 digits
+      </mat-error>
+    </mat-form-field>
+    <a (click)="onSubmit()" [disabled]="!componentForm.valid" mat-flat-button color="primary"
+       class="full-width">
+      Update
+    </a>
+    <mat-divider></mat-divider>
+  </form>
+  <div class="container full-width text-center">
+    <a (click)="forgotPassword()" class="text-primary">Change Password</a>
+
+  </div>
+</mat-card>

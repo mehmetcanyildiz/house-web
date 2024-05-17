@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
 })
-export class DetailComponent{
+export class DetailComponent {
   images: any[] = [
     {url: 'path/to/image1.jpg', alt: 'Image 1'},
     {url: 'path/to/image2.jpg', alt: 'Image 2'},
