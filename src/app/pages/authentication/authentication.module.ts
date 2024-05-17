@@ -19,6 +19,7 @@ import {AppSideRegisterComponent} from './register/register.component';
 import {AppSideForgotComponent} from "./forgot/forgot.component";
 import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
 import {AppSideActivateComponent} from "./activate/activate.component";
+import {AppSideResetComponent} from "./reset/reset.component";
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {AppSideActivateComponent} from "./activate/activate.component";
     AppSideLoginComponent,
     AppSideRegisterComponent,
     AppSideForgotComponent,
-    AppSideActivateComponent
+    AppSideActivateComponent,
+    AppSideResetComponent
   ],
 })
 export class AuthenticationModule {

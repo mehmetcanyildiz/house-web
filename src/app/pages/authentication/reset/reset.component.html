@@ -1,0 +1,74 @@
+<div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
+  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+    <div class="col-lg-4 d-flex align-items-center">
+      <mat-card class="cardWithShadow boxed-auth">
+        <mat-card-content class="p-32">
+          <div class="text-center">
+            <a [routerLink]="['/']">
+              <img
+                ngSrc="./assets/images/logos/dark-logo.svg"
+                class="align-middle m-2"
+                alt="logo"
+                height="40" width="178"/>
+            </a>
+          </div>
+          <div class="or-border m-t-30">Reset Your Password</div>
+          <form [formGroup]="componentForm" class="m-t-30">
+            <!-- email -->
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
+              Reset Code
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="number"
+                     formControlName="token"
+                     placeholder="Activate Code"
+                     readonly
+                     required/>
+            </mat-form-field>
+            <!-- password -->
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
+              Password
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" placeholder="Password" formControlName="password"
+                     required/>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('minlength')">
+                Minimum length is 6 characters
+              </mat-error>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('maxlength')">
+                Maximum length is 20 characters
+              </mat-error>
+            </mat-form-field>
+            <!-- confirmPassword -->
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">
+              Confirm Password
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" placeholder="Confirm Password"
+                     formControlName="confirm" required/>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('minlength')">
+                Minimum length is 6 characters
+              </mat-error>
+              <mat-error *ngIf="componentForm.get('password')?.hasError('maxlength')">
+                Maximum length is 20 characters
+              </mat-error>
+              <mat-error *ngIf="componentForm.get('confirm')?.hasError('required')">
+                Confirm Password is required
+              </mat-error>
+            </mat-form-field>
+            <a (click)="onSubmit()" mat-flat-button color="primary" class="w-100">
+              Submit
+            </a>
+            <!-- input -->
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

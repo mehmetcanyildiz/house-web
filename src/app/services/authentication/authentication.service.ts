@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {RegisterDTO} from "../../dto/authentication/RegisterDTO";
 import {CustomSnackBar} from "../snackbar.service";
 import {ActivateDTO} from "../../dto/authentication/ActivateDTO";
+import {ForgotDTO} from "../../dto/authentication/ForgotDTO";
+import {ResetDTO} from "../../dto/authentication/ResetDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +69,20 @@ export class AuthenticationService {
   activateAccount(activateDTO: ActivateDTO) {
     const url: string = `${environment.apiUrl}/auth/activate-account`;
     return this.http.post(url, activateDTO).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/auth/login');
+    });
+  }
+
+  forgotPasswordClient(formDTO: ForgotDTO) {
+    const url: string = `${environment.apiUrl}/auth/password-reset-client`;
+    return this.http.post(url, formDTO).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/auth/login');
+    });
+  }
+
+  resetPassword(formDTO: ResetDTO) {
+    const url: string = `${environment.apiUrl}/auth/password-reset`;
+    return this.http.put(url, formDTO).subscribe((res: any) => {
       this.snackBar.route(res.message, '/auth/login');
     });
   }
