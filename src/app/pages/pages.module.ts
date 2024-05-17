@@ -14,6 +14,7 @@ import {FavoritesComponent} from "./profile/favorites/favorites.component";
 import {CreateComponent} from "./classified/create/create.component";
 import {EditComponent} from "./classified/edit/edit.component";
 import {DetailComponent} from "./classified/detail/detail.component";
+import {NgbCarousel, NgbSlide} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   imports: [
@@ -24,6 +25,8 @@ import {DetailComponent} from "./classified/detail/detail.component";
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
     ReactiveFormsModule,
+    NgbCarousel,
+    NgbSlide,
   ],
   declarations: [
     ClassifiedsComponent,

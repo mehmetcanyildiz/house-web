@@ -5,11 +5,11 @@ import {Component} from '@angular/core';
   templateUrl: './detail.component.html',
 })
 export class DetailComponent {
-  images: any[] = [
-    {url: 'path/to/image1.jpg', alt: 'Image 1'},
-    {url: 'path/to/image2.jpg', alt: 'Image 2'},
-    {url: 'path/to/image3.jpg', alt: 'Image 3'}
-  ];
+  images = [
+    'https://i.pinimg.com/originals/9c/7b/e4/9c7be43979a736a8695361a544630b97.jpg',
+    'https://i.pinimg.com/originals/9c/7b/e4/9c7be43979a736a8695361a544630b97.jpg',
+    'https://i.pinimg.com/originals/9c/7b/e4/9c7be43979a736a8695361a544630b97.jpg'
+  ]
 
   constructor() {
   }

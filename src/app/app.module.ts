@@ -24,6 +24,7 @@ import {HeaderComponent} from './layouts/full/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {ErrorHandlerService, HttpInterceptorService, JwtInterceptor} from "./helpers";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const PROVIDERS: any[] = [
   {
@@ -60,6 +61,7 @@ export const PROVIDERS: any[] = [
     TablerIconsModule.pick(TablerIcons),
     NgScrollbarModule,
     NgOptimizedImage,
+    NgbModule,
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
