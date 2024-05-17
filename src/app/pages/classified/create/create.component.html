@@ -1,1 +1,153 @@
-<p>create works!</p>
+<mat-card>
+  <mat-card-content class="p-32">
+    <form [formGroup]="componentForm" (ngSubmit)="onSubmit()" class="example-form">
+      <mat-form-field class="w-100">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title">
+        <mat-error *ngIf="componentForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('title')?.hasError('maxlength')">
+          Title is max 60 characters
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('title')?.hasError('minlength')">
+          Title is max 5 characters
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <mat-error *ngIf="componentForm.get('description')?.hasError('required')">
+          Description is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('description')?.hasError('maxlength')">
+          Description is max 500 characters
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('description')?.hasError('minlength')">
+          Description is max 5 characters
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" placeholder="Price" formControlName="price">
+        <mat-error *ngIf="componentForm.get('price')?.hasError('required')">
+          Price is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('price')?.hasError('min')">
+          Price is min 1
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('price')?.hasError('max')">
+          Price is max 100000000
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="componentForm.get('type')?.hasError('required')">
+          Type is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="componentForm.get('category')?.hasError('required')">
+          Category is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Room Number</mat-label>
+        <input matInput type="number" placeholder="Room Number" formControlName="roomNumber">
+        <mat-error *ngIf="componentForm.get('roomNumber')?.hasError('required')">
+          Room number is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('roomNumber')?.hasError('min')">
+          Room number is min 1
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('roomNumber')?.hasError('max')">
+          Room number is max 100
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Living Room Number</mat-label>
+        <input matInput type="number" placeholder="Living Room Number"
+               formControlName="livingRoomNumber">
+        <mat-error *ngIf="componentForm.get('livingRoomNumber')?.hasError('required')">
+          Living Room number is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('livingRoomNumber')?.hasError('min')">
+          Living Room number is min 0
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Gross Area (m²)</mat-label>
+        <input matInput type="number" placeholder="Gross Area (m²)" formControlName="grossArea">
+        <mat-error *ngIf="componentForm.get('grossArea')?.hasError('required')">
+          Gross area is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Net Area (m²)</mat-label>
+        <input matInput type="number" placeholder="Net Area (m²)" formControlName="netArea">
+        <mat-error *ngIf="componentForm.get('netArea')?.hasError('required')">
+          Net area is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('netArea')?.hasError('min')">
+          Net area is min 1
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('netArea')?.hasError('max')">
+          Net area is max 1000
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Building Age</mat-label>
+        <input matInput type="number" placeholder="Building Age" formControlName="buildingAge">
+        <mat-error *ngIf="componentForm.get('buildingAge')?.hasError('required')">
+          Building age is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('buildingAge')?.hasError('min')">
+          Building age is min 1
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Floor Location</mat-label>
+        <input matInput type="number" placeholder="Floor Location" formControlName="floorLocation">
+        <mat-error *ngIf="componentForm.get('floorLocation')?.hasError('required')">
+          Floor location is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('floorLocation')?.hasError('min')">
+          Floor location is min 1
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Total Floor</mat-label>
+        <input matInput type="number" placeholder="Total Floor" formControlName="totalFloor">
+        <mat-error *ngIf="componentForm.get('totalFloor')?.hasError('required')">
+          Total floor is required
+        </mat-error>
+        <mat-error *ngIf="componentForm.get('totalFloor')?.hasError('min')">
+          Total floor is min 1
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex flex-row justify-content-between">
+        <div class="form-field">
+          <mat-checkbox formControlName="isFurnished">Furnished</mat-checkbox>
+        </div>
+        <div class="form-field">
+          <input type="file" formControlName="images" (change)="onFileChange($event)" multiple>
+        </div>
+      </div>
+    </form>
+    <mat-divider></mat-divider>
+    <div class="form-footer">
+      <button mat-raised-button (click)="onSubmit()" color="primary" type="submit">Submit</button>
+    </div>
+  </mat-card-content>
+</mat-card>

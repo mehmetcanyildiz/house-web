@@ -48,21 +48,21 @@ export const PagesRoutes: Routes = [
         path: 'create',
         component: CreateComponent,
         data: {
-          title: 'Create Property',
+          title: 'Create Classified',
         },
       },
       {
         path: 'edit/:id',
         component: EditComponent,
         data: {
-          title: 'Edit Property'
+          title: 'Edit Classified'
         },
       },
       {
         path: 'detail/:id',
         component: DetailComponent,
         data: {
-          title: 'Detail Property',
+          title: 'Detail Classified',
         },
       },
     ],

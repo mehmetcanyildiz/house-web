@@ -22,6 +22,7 @@ export class HeaderComponent {
     private dataService: DataService,
   ) {
     this.dataService.data.subscribe((data) => {
+
       this.pageTitle = data;
     });
   }
