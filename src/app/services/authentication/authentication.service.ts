@@ -51,6 +51,9 @@ export class AuthenticationService {
   }
 
   logout() {
+
+    this.userSubject.next(null);
+    localStorage.removeItem('user');
     const url: string = `${environment.apiUrl}/auth/logout`;
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -60,8 +63,6 @@ export class AuthenticationService {
     }
     this.http.delete<any>(url, options).subscribe(
       (res: any) => {
-        this.userSubject.next(null);
-        localStorage.removeItem('user');
         this.snackBar.route(res.message, '/auth/login');
       }
     );
