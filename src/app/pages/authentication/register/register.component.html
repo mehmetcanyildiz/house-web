@@ -69,6 +69,15 @@
                   </mat-error>
                 </mat-form-field>
               </form>
+              <div>
+                <button mat-flat-button
+                        matStepperNext
+                        color="primary"
+                        [disabled]="!firstFormGroup.valid"
+                        class="w-100">
+                  Next
+                </button>
+              </div>
             </mat-step>
             <!-- Step 2 -->
             <mat-step label="Step 2">
@@ -107,12 +116,17 @@
                   </mat-error>
                 </mat-form-field>
               </form>
+              <div>
+                <button mat-flat-button
+                        (click)="onSubmit()"
+                        [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"
+                        color="primary"
+                        class="w-100">
+                  Sign up
+                </button>
+              </div>
             </mat-step>
           </mat-stepper>
-          <a (click)="onSubmit()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"
-             mat-flat-button color="primary" class="w-100">
-            Sign Up
-          </a>
           <span class="d-block f-w-500 text-center m-t-24">
             Already have an Account?
             <a [routerLink]="['/auth/login']"

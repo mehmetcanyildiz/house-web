@@ -5,6 +5,7 @@ import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {firstValueFrom} from "rxjs";
 import {DomSanitizer, SafeHtml, Title} from "@angular/platform-browser";
+import {AuthenticationService} from "../../../services";
 
 @Component({
   selector: 'app-detail',
@@ -13,6 +14,7 @@ import {DomSanitizer, SafeHtml, Title} from "@angular/platform-browser";
 export class DetailComponent implements OnInit {
   public slug: string | null = '';
   public classified: any;
+  user!: any;
 
   images: string[] = [];
 
@@ -20,7 +22,8 @@ export class DetailComponent implements OnInit {
               private title: Title,
               private route: ActivatedRoute,
               private snackBar: CustomSnackBar,
-              private sanitizer: DomSanitizer
+              private sanitizer: DomSanitizer,
+              private authenticationService: AuthenticationService
   ) {
     this.slug = this.route.snapshot.paramMap.get('slug');
   }
@@ -44,6 +47,8 @@ export class DetailComponent implements OnInit {
         }
       });
     }
+
+    this.user = this.authenticationService.userValue;
   }
 
   formattedText(text: string): SafeHtml {
@@ -94,5 +99,9 @@ export class DetailComponent implements OnInit {
           this.snackBar.message(res.message);
         });
     }
+  }
+
+  editPage() {
+    this.snackBar.route('Edit Property', '/classified/edit/' + this.slug);
   }
 }

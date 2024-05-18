@@ -17,7 +17,13 @@ import {AuthenticationRoutes} from './authentication.routing';
 import {AppSideLoginComponent} from './login/login.component';
 import {AppSideRegisterComponent} from './register/register.component';
 import {AppSideForgotComponent} from "./forgot/forgot.component";
-import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
+import {
+  MatStep,
+  MatStepLabel,
+  MatStepper,
+  MatStepperNext,
+  MatStepperPrevious
+} from "@angular/material/stepper";
 import {AppSideActivateComponent} from "./activate/activate.component";
 import {AppSideResetComponent} from "./reset/reset.component";
 
@@ -37,6 +43,8 @@ import {AppSideResetComponent} from "./reset/reset.component";
     MatStep,
     MatStepLabel,
     MatStepper,
+    MatStepperPrevious,
+    MatStepperNext,
   ],
   declarations: [
     AppSideLoginComponent,

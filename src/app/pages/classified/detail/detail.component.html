@@ -3,7 +3,11 @@
     <mat-card-title>{{ classified?.title }}</mat-card-title>
     <mat-card-subtitle>{{ classified?.price | number:'1.0-0' }} TL</mat-card-subtitle>
     <div class="flex-1-auto"></div>
-    <button mat-icon-button (click)="favorite()"
+    <button *ngIf="classified.user.email === user.email" mat-icon-button (click)="editPage()" matTooltip="Edit"
+            aria-label="Edit Button">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button *ngIf="classified.user.email !== user.email" mat-icon-button (click)="favorite()"
             matTooltip="{{this.classified?.isFavorite ? 'Favorite Remove' : 'Favorite Add'}}"
             color="{{this.classified?.isFavorite ? 'primary' : 'secondary'}}"
             aria-label="Favorite Button">
