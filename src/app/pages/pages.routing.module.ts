@@ -22,7 +22,7 @@ export const PagesRoutes: Routes = [
         path: 'my-classifieds',
         component: ClassifiedsComponent,
         data: {
-          title: 'My Classifieds',
+          title: 'My Properties',
         },
       },
       {
@@ -48,21 +48,21 @@ export const PagesRoutes: Routes = [
         path: 'create',
         component: CreateComponent,
         data: {
-          title: 'Create Classified',
+          title: 'Create Property',
         },
       },
       {
-        path: 'edit/:id',
+        path: 'edit/:slug',
         component: EditComponent,
         data: {
-          title: 'Edit Classified'
+          title: 'Edit Property'
         },
       },
       {
-        path: 'detail/:id',
+        path: 'detail/:slug',
         component: DetailComponent,
         data: {
-          title: 'Detail Classified',
+          title: 'Detail Property',
         },
       },
     ],

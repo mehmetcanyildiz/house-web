@@ -13,7 +13,6 @@ export class AuthGuard {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('AuthGuard#canActivate called');
     const user = this.authenticationService.userValue;
     if (user) {
       return true;

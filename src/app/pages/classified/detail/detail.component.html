@@ -1,87 +1,119 @@
-<mat-card>
+<mat-card class="classified">
   <mat-card-header class="mat-mdc-card-header-detail">
-    <mat-card-title>BURSA HAMİTLER SATILIK 2+1 LÜKS DAİRE</mat-card-title>
-    <mat-card-subtitle>1.000.000 TL</mat-card-subtitle>
+    <mat-card-title>{{ classified?.title }}</mat-card-title>
+    <mat-card-subtitle>{{ classified?.price | number:'1.0-0' }} TL</mat-card-subtitle>
     <div class="flex-1-auto"></div>
-    <button mat-icon-button matTooltip="Favorite Add" color="primary"
-            aria-label="Example icon-button with a heart icon">
+    <button mat-icon-button (click)="favorite()"
+            matTooltip="{{this.classified?.isFavorite ? 'Favorite Remove' : 'Favorite Add'}}"
+            color="{{this.classified?.isFavorite ? 'primary' : 'secondary'}}"
+            aria-label="Favorite Button">
       <mat-icon>favorite</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Share" aria-label="Example icon-button with a share icon">
+    <button mat-icon-button (click)="shareClassified()" matTooltip="Share"
+            aria-label="Share Button">
       <mat-icon>share</mat-icon>
     </button>
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
     @if (images) {
-      <div class="card">
+      <div *ngIf="images && images.length > 0" class="classified-slider">
         <ngb-carousel>
-          <ng-template ngbSlide>
+          <ng-template ngbSlide *ngFor="let image of images">
             <div class="picsum-img-wrapper">
-              <img [src]="images[0]" alt="Random first slide" />
-            </div>
-            <div class="carousel-caption">
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </div>
-          </ng-template>
-          <ng-template ngbSlide>
-            <div class="picsum-img-wrapper">
-              <img [src]="images[1]" alt="Random second slide" />
-            </div>
-            <div class="carousel-caption">
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </ng-template>
-          <ng-template ngbSlide>
-            <div class="picsum-img-wrapper">
-              <img [src]="images[2]" alt="Random third slide" />
-            </div>
-            <div class="carousel-caption">
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              <img [src]="image" alt="Classified image"/>
             </div>
           </ng-template>
         </ngb-carousel>
       </div>
     }
     <mat-tab-group>
-      <mat-tab label="Classified Details">
+      <mat-tab label="Property Details">
         <mat-list>
           <mat-list-item>
             <span matListItemTitle>Price</span>
-            <span matListItemLine>1.000.000 TL</span>
+            <span matListItemLine>{{ classified?.price | number:'1.0-0' }} TL</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span matListItemTitle>Location</span>
-            <span matListItemLine>Bursa, Hamitler</span>
+            <span matListItemTitle>Type</span>
+            <span matListItemLine>{{ classified?.type }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
             <span matListItemTitle>Category</span>
-            <span matListItemLine>Real Estate</span>
+            <span matListItemLine>{{ classified?.category }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span matListItemTitle>Sub Category</span>
-            <span matListItemLine>Apartment</span>
+            <span matListItemTitle>Room Number</span>
+            <span matListItemLine>{{ classified?.roomNumber }}
+              + {{ classified?.livingRoomNumber }}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span matListItemTitle>Ad Type</span>
-            <span matListItemLine>For Sale</span>
+            <span matListItemTitle>Gross Area</span>
+            <span matListItemLine>{{ classified?.grossArea }} m²</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <span matListItemTitle>Area</span>
-            <span matListItemLine>100 m²</span>
+            <span matListItemTitle>Net Area</span>
+            <span matListItemLine>{{ classified?.netArea }} m²</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Building Age</span>
+            <span matListItemLine>{{ classified?.buildingAge }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Floor Location</span>
+            <span matListItemLine>{{ classified?.floorLocation }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Total Floor</span>
+            <span matListItemLine>{{ classified?.totalFloor }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Is Furnished</span>
+            <span matListItemLine>{{ classified?.isFurnished ? 'Yes' : 'No' }}</span>
           </mat-list-item>
         </mat-list>
       </mat-tab>
-      <mat-tab label="Descriptions"> Content 2</mat-tab>
-      <mat-tab label="Contacts"> Content 2</mat-tab>
+      <mat-tab label="Descriptions">
+        <div class="container">
+          <div class="d-flex justify-content-center align-items-center text-center"
+               [innerHTML]="formattedText(classified?.description)">
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Contacts">
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Firstname</span>
+            <span matListItemLine>{{ classified?.user?.firstname }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Lastname</span>
+            <span matListItemLine>{{ classified?.user?.lastname }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Email</span>
+            <a href="mailto:{{ classified?.user?.email }}"
+               matListItemLine>{{ classified?.user?.email }}</a>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matListItemTitle>Phone</span>
+            <a href="tel:+90{{ classified?.user?.phone }}"
+               matListItemLine>+90 {{ classified?.user?.phone }}</a>
+          </mat-list-item>
+        </mat-list>
+      </mat-tab>
     </mat-tab-group>
   </mat-card-content>
 </mat-card>
