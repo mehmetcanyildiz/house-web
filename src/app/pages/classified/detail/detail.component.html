@@ -1,4 +1,4 @@
-<mat-card class="classified">
+<mat-card class="classified" *ngIf="classified">
   <mat-card-header class="mat-mdc-card-header-detail">
     <mat-card-title>{{ classified?.title }}</mat-card-title>
     <mat-card-subtitle>{{ classified?.price | number:'1.0-0' }} TL</mat-card-subtitle>
@@ -117,3 +117,11 @@
     </mat-tab-group>
   </mat-card-content>
 </mat-card>
+<div class="row" *ngIf="!classified">
+  <div class="col-12">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <i-tabler name="loader" class="icon-24"></i-tabler>
+    </div>
+  </div>
+</div>
+

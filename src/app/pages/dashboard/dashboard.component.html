@@ -1,54 +1,44 @@
-<div class="row">
-  <div class="col-sm-6 col-lg-3" *ngFor="let productcard of productcards">
-    <mat-card [routerLink]="['/classified/detail/wfefwe']"
-              class="cardWithShadow productcard overflow-hidden">
-      <a routerLink="/widgets/cards">
-        <img
-          src="{{ productcard.imgSrc }}"
-          alt="imgSrc"
-          class="w-100"
-          mat-card-image
-        />
-      </a>
+<div class="row" *ngIf="classifieds && classifieds.length != undefined && classifieds.length>0">
+  <div class="col-sm-6 col-lg-3" *ngFor="let property of classifieds">
+    <mat-card
+      [routerLink]="['/classified/detail/'+property.slug]"
+      class="cardWithShadow productcard overflow-hidden cursor-pointer">
+      <div class="d-flex text-center position-absolute z-1 bg-danger m-3 text-light p-2 end-0">
+        {{ property.type + ' / ' + property.category }}
+      </div>
+      <img
+        src="{{ property.images.length>0 ? environment.server+property.images[0].path:'/assets/images/products/p1.jpg' }}"
+        alt="imgSrc"
+        class="img-thumbnail"
+        mat-card-image
+      />
       <mat-card-content class="p-b-24 p-t-12 position-relative">
-        <button
-          mat-mini-fab
-          color="primary"
-          class="icon-30 cart-btn"
-          matTooltip="Add to Cart"
-        >
-          <i-tabler name="basket" class="icon-16"></i-tabler>
-        </button>
         <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
-            productcard.title
+            property.title
           }}
         </mat-card-title>
-        <div class="d-flex align-items-center justify-content-between">
+        <mat-divider></mat-divider>
+        <div class="d-flex align-items-center justify-content-between mt-2">
           <div class="d-flex align-items-center">
-            <h6 class="mat-body-2 f-w-600">${{ productcard.price }}</h6>
-            <span class="f-s-14 m-l-4 text-decoration-line-through"
-            >${{ productcard.rprice }}</span
-            >
+            <h6 class="mat-body-2 f-w-600">{{ property.price }} ₺</h6>
           </div>
           <div class="m-l-auto d-flex gap-4">
-            <span
-            ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
-            ></span>
-            <span
-            ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
-            ></span>
-            <span
-            ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
-            ></span>
-            <span
-            ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
-            ></span>
-            <span
-            ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
-            ></span>
+            {{ property.roomNumber + ' + ' + property.livingRoomNumber }}
           </div>
         </div>
       </mat-card-content>
     </mat-card>
+  </div>
+</div>
+<div class="row" *ngIf="classifieds && classifieds.length != undefined && classifieds.length==0">
+  <div class="col-12">
+    <div class="alert alert-primary text-center">Properties not found</div>
+  </div>
+</div>
+<div class="row" *ngIf="!classifieds">
+  <div class="col-12">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <i-tabler name="loader" class="icon-24"></i-tabler>
+    </div>
   </div>
 </div>

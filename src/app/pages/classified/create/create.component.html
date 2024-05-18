@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="componentForm">
   <mat-card-content class="p-32">
     <form [formGroup]="componentForm" (ngSubmit)="onSubmit()" class="example-form">
       <mat-form-field class="w-100">
@@ -151,3 +151,11 @@
     </div>
   </mat-card-content>
 </mat-card>
+<div class="row" *ngIf="!componentForm">
+  <div class="col-12">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <i-tabler name="loader" class="icon-24"></i-tabler>
+    </div>
+  </div>
+</div>
+

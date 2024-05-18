@@ -1,7 +1,8 @@
 // card
 .mat-mdc-card {
   margin-bottom: 30px;
-  border-radius: $border-radius;
+  height: 100%;
+  margin-bottom: 0;
 }
 
 .mat-mdc-card-header {
