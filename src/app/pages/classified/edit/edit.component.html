@@ -1,1 +1,180 @@
-<p>edit works!</p>
+<mat-card>
+  <mat-card-content class="p-32">
+    <form *ngIf="editForm" [formGroup]="editForm" (ngSubmit)="onSubmit()" class="example-form">
+      <mat-form-field class="w-100">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title">
+        <mat-error *ngIf="editForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('title')?.hasError('maxlength')">
+          Title is max 60 characters
+        </mat-error>
+        <mat-error *ngIf="editForm.get('title')?.hasError('minlength')">
+          Title is max 5 characters
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <mat-error *ngIf="editForm.get('description')?.hasError('required')">
+          Description is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('description')?.hasError('maxlength')">
+          Description is max 500 characters
+        </mat-error>
+        <mat-error *ngIf="editForm.get('description')?.hasError('minlength')">
+          Description is max 5 characters
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" placeholder="Price" formControlName="price">
+        <mat-error *ngIf="editForm.get('price')?.hasError('required')">
+          Price is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('price')?.hasError('min')">
+          Price is min 1
+        </mat-error>
+        <mat-error *ngIf="editForm.get('price')?.hasError('max')">
+          Price is max 100000000
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.get('type')?.hasError('required')">
+          Type is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.get('category')?.hasError('required')">
+          Category is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Room Number</mat-label>
+        <input matInput type="number" placeholder="Room Number" formControlName="roomNumber">
+        <mat-error *ngIf="editForm.get('roomNumber')?.hasError('required')">
+          Room number is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('roomNumber')?.hasError('min')">
+          Room number is min 1
+        </mat-error>
+        <mat-error *ngIf="editForm.get('roomNumber')?.hasError('max')">
+          Room number is max 100
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Living Room Number</mat-label>
+        <input matInput type="number" placeholder="Living Room Number"
+               formControlName="livingRoomNumber">
+        <mat-error *ngIf="editForm.get('livingRoomNumber')?.hasError('required')">
+          Living Room number is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('livingRoomNumber')?.hasError('min')">
+          Living Room number is min 0
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Gross Area (m²)</mat-label>
+        <input matInput type="number" placeholder="Gross Area (m²)" formControlName="grossArea">
+        <mat-error *ngIf="editForm.get('grossArea')?.hasError('required')">
+          Gross area is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Net Area (m²)</mat-label>
+        <input matInput type="number" placeholder="Net Area (m²)" formControlName="netArea">
+        <mat-error *ngIf="editForm.get('netArea')?.hasError('required')">
+          Net area is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('netArea')?.hasError('min')">
+          Net area is min 1
+        </mat-error>
+        <mat-error *ngIf="editForm.get('netArea')?.hasError('max')">
+          Net area is max 1000
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Building Age</mat-label>
+        <input matInput type="number" placeholder="Building Age" formControlName="buildingAge">
+        <mat-error *ngIf="editForm.get('buildingAge')?.hasError('required')">
+          Building age is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('buildingAge')?.hasError('min')">
+          Building age is min 1
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Floor Location</mat-label>
+        <input matInput type="number" placeholder="Floor Location" formControlName="floorLocation">
+        <mat-error *ngIf="editForm.get('floorLocation')?.hasError('required')">
+          Floor location is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('floorLocation')?.hasError('min')">
+          Floor location is min 1
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Total Floor</mat-label>
+        <input matInput type="number" placeholder="Total Floor" formControlName="totalFloor">
+        <mat-error *ngIf="editForm.get('totalFloor')?.hasError('required')">
+          Total floor is required
+        </mat-error>
+        <mat-error *ngIf="editForm.get('totalFloor')?.hasError('min')">
+          Total floor is min 1
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Classified Status</mat-label>
+        <mat-select formControlName="classifiedStatus">
+          <mat-option *ngFor="let value of classifiedStatus" [value]="value">
+            {{ value === 'ACTIVE' ? 'SALE / RENT' : 'SOLD / RENTED' }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.get('classifiedStatus')?.hasError('required')">
+          Classified Status is required
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex flex-row justify-content-between">
+        <div class="form-field">
+          <mat-checkbox formControlName="isFurnished">Furnished</mat-checkbox>
+        </div>
+        <div class="form-field">
+          <input type="file" formControlName="images" (change)="onFileChange($event)" multiple>
+        </div>
+      </div>
+    </form>
+    <div class="card mb-3" *ngIf="images && images.length > 0">
+      <div class="card-header">Images</div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngFor="let image of images;  let i = index"
+               class="col mb-2 d-flex flex-column justify-content-center align-items-center text-center">
+            <img [src]="image.path" alt="Classified Image" width="200" height="200"
+                 class="img-thumbnail">
+            <button (click)="deleteImage(i,image.id)" class="btn btn-sm mt-2 btn-danger">
+              <i-tabler name="trash" class="fill-light icon-18"></i-tabler>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="form-footer justify-content-between">
+      <button  (click)="onDelete()" class="btn btn-sm btn-danger" type="button">Delete Property</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary" type="submit">Submit</button>
+    </div>
+  </mat-card-content>
+</mat-card>

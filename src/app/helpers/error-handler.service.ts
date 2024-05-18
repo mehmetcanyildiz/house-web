@@ -2,6 +2,7 @@ import {ErrorHandler, Injectable, NgZone} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthenticationService} from "../services";
+import {CustomSnackBar} from "../services/snackbar.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,13 @@ export class ErrorHandlerService implements ErrorHandler {
 
   constructor(
     private snackBar: MatSnackBar,
+    private customSnackBar: CustomSnackBar,
     private zone: NgZone,
     private authenticationService: AuthenticationService) {
   }
 
 
   handleError(error: any): void {
-
-    console.log(error.status);
     let message = '';
 
     if (error.error && error.error.validationErrors) {
@@ -49,6 +49,12 @@ export class ErrorHandlerService implements ErrorHandler {
     if (sessionUser && error.status === 401) {
       this.authenticationService.logout();
     }
+
+    if (error.url.includes('classified/get/')) {
+      this.customSnackBar.route(message, '/');
+    }
+
+
     console.error('It happens: ', error);
   }
 }

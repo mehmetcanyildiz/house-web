@@ -23,4 +23,11 @@ export class ClassifiedService {
       this.snackBar.route(res.message, '/classified/detail/' + res.slug);
     });
   }
+
+  update(id: string, formData: FormData) {
+    const url: string = `${environment.apiUrl}/classified/update/${id}`;
+    return this.http.put(url, formData).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/classified/detail/' + res.slug);
+    });
+  }
 }
