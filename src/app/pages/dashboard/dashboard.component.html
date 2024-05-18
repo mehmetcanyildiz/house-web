@@ -2,7 +2,7 @@
   <div class="col-sm-6 col-lg-3" *ngFor="let property of classifieds">
     <mat-card
       [routerLink]="['/classified/detail/'+property.slug]"
-      class="cardWithShadow productcard overflow-hidden cursor-pointer">
+      class="cardWithShadow productcard overflow-hidden cursor-pointer mb-2">
       <div class="d-flex text-center position-absolute z-1 bg-danger m-3 text-light p-2 end-0">
         {{ property.type + ' / ' + property.category }}
       </div>

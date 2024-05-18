@@ -51,21 +51,8 @@ export class AuthenticationService {
   }
 
   logout() {
-
     this.userSubject.next(null);
     localStorage.removeItem('user');
-    const url: string = `${environment.apiUrl}/auth/logout`;
-    let options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      body: {
-        token: this.userValue?.access_token
-      }
-    }
-    this.http.delete<any>(url, options).subscribe(
-      (res: any) => {
-        this.snackBar.route(res.message, '/auth/login');
-      }
-    );
   }
 
   activateAccount(activateDTO: ActivateDTO) {
