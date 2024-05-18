@@ -11,7 +11,7 @@ import {firstValueFrom} from "rxjs";
 export class FavoritesComponent implements OnInit {
   public classifieds: any;
 
-  constructor(private http: HttpClient,private authenticationService: AuthenticationService) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
 
   }
 

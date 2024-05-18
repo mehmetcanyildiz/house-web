@@ -11,7 +11,7 @@ import {AuthenticationService} from "../../../services";
 export class ClassifiedsComponent implements OnInit {
   public classifieds: any;
 
-  constructor(private http: HttpClient,private authenticationService: AuthenticationService) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
   }
 
   async ngOnInit() {
