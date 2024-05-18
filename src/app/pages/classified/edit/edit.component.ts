@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CreateDTO} from "../../../dto/classified/CreateDTO";
 import {UpdateDTO} from "../../../dto/classified/UpdateDTO";
 import {ClassifiedService} from "../../../services/classified/classified.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -103,13 +104,10 @@ export class EditComponent implements OnInit {
   onSubmit() {
     if (this.editForm.valid) {
       this.formDTO = new CreateDTO();
-
       const formData = new FormData();
-
       if (this.editForm.value.isFurnished === null) {
         this.editForm.value.isFurnished = false;
       }
-
       formData.append('title', this.editForm.value.title);
       formData.append('description', this.editForm.value.description);
       formData.append('price', this.editForm.value.price);
@@ -124,15 +122,12 @@ export class EditComponent implements OnInit {
       formData.append('totalFloor', this.editForm.value.totalFloor);
       formData.append('isFurnished', this.editForm.value.isFurnished);
       formData.append('classifiedStatus', this.editForm.value.classifiedStatus);
-
-      if(this.selectedFiles.length !== 0) {
+      if (this.selectedFiles.length !== 0) {
         this.selectedFiles.forEach(file => {
           formData.append('images[]', file);
         });
       }
-
-
-      this.classifiedService.update(this.classified?.id,formData);
+      this.classifiedService.update(this.classified?.id, formData);
     } else {
       this.snackBar.message('Please fill all required fields',);
     }
@@ -140,14 +135,37 @@ export class EditComponent implements OnInit {
 
   onDelete() {
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this property!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.classifiedService.delete(this.classified?.id);
+      }
+    })
   }
 
   deleteImage(e: number, id: any) {
-    this.http.delete(`${environment.apiUrl}/classified/delete/image/${id}`).subscribe(
-      (res: any) => {
-        this.images.splice(e, 1);
-        this.snackBar.message(res.message);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.delete(`${environment.apiUrl}/classified/delete/image/${id}`).subscribe(
+          (res: any) => {
+            this.images.splice(e, 1);
+            this.snackBar.message(res.message);
+          }
+        );
       }
-    );
+    })
   }
 }

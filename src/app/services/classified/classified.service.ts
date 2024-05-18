@@ -30,4 +30,11 @@ export class ClassifiedService {
       this.snackBar.route(res.message, '/classified/detail/' + res.slug);
     });
   }
+
+  delete(id: any) {
+    const url: string = `${environment.apiUrl}/classified/delete/${id}`;
+    return this.http.delete(url).subscribe((res: any) => {
+      this.snackBar.route(res.message, '/profile/my-classifieds');
+    });
+  }
 }
