@@ -15,7 +15,7 @@ RUN npm run build --configuration=stage
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist/testApp /usr/share/nginx/html
+COPY --from=build /app/dist/house-web /usr/share/nginx/html
 
 EXPOSE 80
 
