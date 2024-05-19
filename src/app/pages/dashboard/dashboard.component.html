@@ -20,7 +20,7 @@
         <mat-divider></mat-divider>
         <div class="d-flex align-items-center justify-content-between mt-2">
           <div class="d-flex align-items-center">
-            <h6 class="mat-body-2 f-w-600">{{ property.price }} ₺</h6>
+            <h6 class="mat-body-2 f-w-600">{{ property.price | number:'1.0-0' }} ₺</h6>
           </div>
           <div class="m-l-auto d-flex gap-4">
             {{ property.roomNumber + ' + ' + property.livingRoomNumber }}
