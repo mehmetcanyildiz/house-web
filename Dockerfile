@@ -4,6 +4,9 @@ FROM node:18.17.0-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+
+RUN npm install -g npm@10.8.0
+
 RUN npm install
 
 COPY . .
