@@ -46,7 +46,7 @@ export class AuthenticationService {
   register(registerDTO: RegisterDTO) {
     const url: string = `${environment.apiUrl}/auth/register`;
     return this.http.post(url, registerDTO).subscribe((res: any) => {
-      this.snackBar.route(res.message, '/auth/login');
+      this.snackBar.route(res.message, '/auth/activate-account');
     });
   }
 
