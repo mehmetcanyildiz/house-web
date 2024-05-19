@@ -11,19 +11,14 @@ import {firstValueFrom} from "rxjs";
 export class FavoritesComponent implements OnInit {
   public classifieds: any;
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   async ngOnInit() {
-    const user = this.authenticationService.userValue;
-
-    this.classifieds = await this.getDetail(user?.uid);
-    console.log(this.classifieds);
+    this.classifieds = await this.getDetail();
   }
 
-  async getDetail(id: any) {
-    const url: string = `${environment.apiUrl}/classified/favorite/${id}`;
+  async getDetail() {
+    const url: string = `${environment.apiUrl}/classified/favorite`;
     return await firstValueFrom(this.http.get(url));
   }
 

@@ -53,8 +53,5 @@ export class ErrorHandlerService implements ErrorHandler {
     if (error.url.includes('classified/get/')) {
       this.customSnackBar.route(message, '/');
     }
-
-
-    console.error('It happens: ', error);
   }
 }
