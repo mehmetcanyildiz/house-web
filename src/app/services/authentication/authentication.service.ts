@@ -53,6 +53,7 @@ export class AuthenticationService {
   logout() {
     this.userSubject.next(null);
     localStorage.removeItem('user');
+    this.snackBar.route("User successfully logout", '/auth/login');
   }
 
   activateAccount(activateDTO: ActivateDTO) {
