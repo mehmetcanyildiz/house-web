@@ -6,6 +6,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
+
 // icons
 import {TablerIconsModule} from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -21,7 +22,7 @@ import {BlankComponent} from './layouts/blank/blank.component';
 
 // Vertical Layout
 import {HeaderComponent} from './layouts/full/header/header.component';
-import {NgOptimizedImage} from "@angular/common";
+import {LocationStrategy, NgOptimizedImage, PathLocationStrategy} from "@angular/common";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {ErrorHandlerService, HttpInterceptorService, JwtInterceptor} from "./helpers";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +42,10 @@ export const PROVIDERS: any[] = [
     provide: ErrorHandler,
     useClass: ErrorHandlerService
   },
+  {
+    provide: LocationStrategy,
+    useClass: PathLocationStrategy
+  }
 ];
 
 @NgModule({
