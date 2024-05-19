@@ -7,7 +7,7 @@ COPY package.json package-lock.json ./
 
 RUN npm install -g npm@10.7.0
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
