@@ -29,6 +29,7 @@ export class AppSideActivateComponent implements OnInit {
       token: [
         token ? atob(token) : '', [
           Validators.required,
+          Validators.pattern('^[0-9]*$'),
           Validators.minLength(6),
           Validators.maxLength(6)
         ]
