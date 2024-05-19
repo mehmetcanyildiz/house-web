@@ -31,6 +31,7 @@ export class AppSideResetComponent implements OnInit {
       token: [
         token ? atob(token) : '', [
           Validators.required,
+          Validators.pattern('^[0-9]*$'),
           Validators.minLength(8),
           Validators.maxLength(8)
         ]
