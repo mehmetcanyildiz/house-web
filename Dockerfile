@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build -- --configuration=stage
+RUN npm run build --configuration=stage
 
 FROM nginx:alpine
 
