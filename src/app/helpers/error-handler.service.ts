@@ -45,8 +45,7 @@ export class ErrorHandlerService implements ErrorHandler {
       });
     });
 
-    const sessionUser = this.authenticationService.userValue;
-    if (sessionUser && error.status === 401) {
+    if (error.status === 401) {
       this.authenticationService.logout();
     }
 
